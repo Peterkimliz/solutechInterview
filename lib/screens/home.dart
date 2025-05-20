@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_common/get_reset.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:intl/intl.dart';
 import 'package:solutech/controllers/visits_controller.dart';
 import 'package:solutech/models/visit.dart';
 import 'package:solutech/screens/visit_add.dart';
@@ -80,9 +81,10 @@ class Home extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(visit.location!),
-                                  Text(visit.visitDate.toString()),
+                                  Text(DateFormat("yyyy-MM-dd").format(visit.visitDate!)),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
