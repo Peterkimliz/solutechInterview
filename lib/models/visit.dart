@@ -1,13 +1,32 @@
+import 'package:hive/hive.dart';
 
-class VisitModel {
-  final int ?id;
-  final int? customerId;
-  final DateTime? visitDate;
-  final String? status;
-  final String? location;
-  final String? notes;
-  final List<String>? activitiesDone;
-  final DateTime? createdAt;
+part 'visit.g.dart';
+
+@HiveType(typeId: 0)
+class VisitModel extends HiveObject {
+  @HiveField(0)
+  int? id; // null for unsynced visits
+
+  @HiveField(1)
+  int? customerId;
+
+  @HiveField(2)
+  String? visitDate;
+
+  @HiveField(3)
+  String? status;
+
+  @HiveField(4)
+  String? location;
+
+  @HiveField(5)
+  String? notes;
+
+  @HiveField(6)
+  List<String> activitiesDone;
+
+  @HiveField(7)
+  bool isSynced;
 
   VisitModel({
     this.id,
@@ -16,31 +35,39 @@ class VisitModel {
     this.status,
     this.location,
     this.notes,
-    this.activitiesDone,
-    this.createdAt,
-  });
+    List<String>? activitiesDone,
+    this.isSynced = false,
+  }) : activitiesDone = activitiesDone ?? [];
 
-  factory VisitModel.fromJson(Map<String, dynamic> json) {
-    return VisitModel(
-      id: json['id'],
-      customerId: json['customer_id'],
-      visitDate: DateTime.parse(json['visit_date']),
-      status: json['status']??"",
-      location: json['location']??"",
-      notes: json['notes'] ?? "",
-      activitiesDone: List<String>.from(json['activities_done'] ?? []),
-      createdAt:json['created_at']==null?null: DateTime.parse(json['created_at']),
-    );
-  }
+  Map<String, dynamic> toJson() => {
+    "customer_id": customerId,
+    "visit_date": visitDate,
+    "status": status,
+    "location": location,
+    "notes": notes,
+    "activities_done": activitiesDone,
+  };
 
-  Map<String, dynamic> toJson() {
-    return {
-      'customer_id': customerId,
-      'visit_date': visitDate!.toIso8601String(),
-      'status': status,
-      'location': location,
-      'notes': notes,
-      'activities_done': activitiesDone,
-    };
-  }
+  factory VisitModel.fromJson(Map<String, dynamic> json) => VisitModel(
+    id: json['id'],
+    customerId: json['customer_id'],
+    visitDate: json['visit_date'] == null ? null : json['visit_date'],
+    status: json['status'],
+    location: json['location'] ?? "",
+    notes: json['notes'] ?? "",
+    activitiesDone: json['activities_done'] == null
+        ? []
+        : List<String>.from(json['activities_done']),
+    isSynced: true,
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is VisitModel &&
+              runtimeType == other.runtimeType &&
+              id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }

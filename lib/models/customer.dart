@@ -1,12 +1,20 @@
-class Customer {
+
+import 'package:hive/hive.dart';
+
+part 'customer.g.dart';
+@HiveType(typeId: 1)
+class CustomerModel {
+  @HiveField(0)
   int? id;
+  @HiveField(1)
   String? name;
+  @HiveField(2)
   DateTime? createdAt;
 
-  Customer({this.name, this.id, this.createdAt});
+  CustomerModel({this.name, this.id, this.createdAt});
 
-  factory Customer.fromJson(Map<String, dynamic> json) {
-    return Customer(
+  factory CustomerModel.fromJson(Map<String, dynamic> json) {
+    return CustomerModel(
       id: json['id'],
       name: json['name'],
       createdAt: json['created_at'] == null

@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:solutech/app_bindings.dart';
-import 'package:solutech/screens/home.dart';
-
+import 'package:solutech/controllers/home_controller.dart';
+import 'package:solutech/screens/home/home.dart';
 import 'controllers/activities_controller.dart';
 import 'controllers/customers_controller.dart';
 import 'controllers/visits_controller.dart';
+import 'models/activity.dart';
+import 'models/customer.dart';
+import 'models/visit.dart';
 
-void main() {
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(VisitModelAdapter());
+  Hive.registerAdapter(ActivityModelAdapter());
+  Hive.registerAdapter(CustomerModelAdapter());
   runApp(MyApp());
 }
 
@@ -16,8 +26,8 @@ class MyApp extends StatelessWidget {
       Get.put<CustomersController>(CustomersController());
   final VisitsController visitsController =
       Get.put<VisitsController>(VisitsController());
-  final ActivitiesController activitiesController =
-      Get.put<ActivitiesController>(ActivitiesController());
+  final ActivitiesController activitiesController = Get.put<ActivitiesController>(ActivitiesController());
+  final HomeController homeController = Get.put<HomeController>(HomeController());
 
   MyApp({super.key});
 
