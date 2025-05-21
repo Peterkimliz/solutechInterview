@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
     visitsController.fetchVisits();
   }
 
-  VisitsController visitsController = Get.find<VisitsController>();
+  final VisitsController visitsController = Get.find<VisitsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +34,18 @@ class Home extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
                 child: TextFormField(
                   controller: visitsController.filterVisits,
-                  onChanged: (value) {},
-                  decoration: InputDecoration(
+                  style: const TextStyle(
+                      color: Colors.white
+                  ),
+                  onChanged: (value) {
+                    visitsController.searchVisit(value);
+                  },
+                  decoration: const InputDecoration(
+                    hintStyle: TextStyle(
+                      color: Colors.white
+                    ),
                     contentPadding: EdgeInsets.symmetric(horizontal: 15),
+                    fillColor: Colors.purple,
                     hintText: "Search...",
                     border: OutlineInputBorder(),
                   ),
@@ -85,7 +94,7 @@ class Home extends StatelessWidget {
                                 children: [
                                   Text(visit.location!),
                                   Text(DateFormat("yyyy-MM-dd").format(visit.visitDate!)),
-                                  Column(
+                                  const Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [],
@@ -102,11 +111,11 @@ class Home extends StatelessWidget {
                                               : Colors.orange,
                                   label: Text(
                                     visit.status!,
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: Colors.white),
                                   ))
                             ],
                           ),
-                          Divider(),
+                          const Divider(),
                         ],
                       ),
                     );

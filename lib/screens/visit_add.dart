@@ -14,6 +14,7 @@ class AddVisitScreen extends StatelessWidget {
   bool isEditting;
 
   AddVisitScreen({super.key, this.visit, this.isEditting = false}) {
+    visitController.clearInputs();
     if (customersController.customers.isEmpty) {
       customersController.fetchCustomers();
     }

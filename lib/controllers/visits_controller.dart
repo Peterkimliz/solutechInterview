@@ -12,6 +12,7 @@ import '../models/visit.dart';
 
 class VisitsController extends GetxController {
   RxList<VisitModel> visits = RxList([]);
+  RxList<VisitModel> searchedList = RxList([]);
   RxBool loadingVisits = RxBool(false);
   RxBool isSearching = RxBool(false);
   Rxn<Customer> selectedCustomer = Rxn(null);
@@ -94,6 +95,15 @@ class VisitsController extends GetxController {
         .indexWhere((e) => e.id == visit.customerId);
     if (index != -1) {
       selectedCustomer.value = customersController.customers[index];
+    }
+  }
+
+  void searchVisit(String value) {
+    if(value.trim().isEmpty){
+      searchedList.clear();
+      searchedList.refresh();
+    }else{
+
     }
   }
 }
