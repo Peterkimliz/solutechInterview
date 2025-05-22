@@ -14,4 +14,7 @@ Also run this on flutter packages pub run build_runner build to generate hive fi
 
 
 ![image](https://github.com/user-attachments/assets/0788187f-02df-4b08-a146-3ecf704093b5)
+![image](https://github.com/user-attachments/assets/481a2f3d-1f01-4d03-b420-31fc7874bdc0)
+![image](https://github.com/user-attachments/assets/415df8d7-28c4-46c5-bdbb-9ea8458a81cc)
+
 
