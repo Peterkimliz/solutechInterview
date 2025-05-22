@@ -1,4 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:solutech/models/activity.dart';
@@ -50,5 +52,24 @@ class ActivitiesController extends GetxController {
     });
 
     super.onInit();
+  }
+
+  getActivities(List<String> activitiesDone) {
+    List<ActivityModel> filteredActivities = activities
+        .where((activity) => activitiesDone.contains(activity.id.toString()))
+        .toList();
+
+    return Wrap(
+        children: filteredActivities
+            .map((e) => Padding(
+                  padding: const EdgeInsets.only(right: 3.0),
+                  child: Chip(
+                    padding: EdgeInsets.zero,
+                      label: Text(
+                    e.description!,
+                    style: const TextStyle(fontSize: 10),
+                  )),
+                ))
+            .toList());
   }
 }

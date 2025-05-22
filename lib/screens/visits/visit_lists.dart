@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_common/get_reset.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:intl/intl.dart';
+import 'package:solutech/controllers/activities_controller.dart';
 import 'package:solutech/controllers/visits_controller.dart';
 import 'package:solutech/models/visit.dart';
 import 'package:solutech/screens/visits/visit_add.dart';
@@ -13,6 +14,8 @@ class VisitList extends StatelessWidget {
   }
 
   final VisitsController visitsController = Get.find<VisitsController>();
+  final ActivitiesController activitiesController =
+      Get.find<ActivitiesController>();
 
   @override
   Widget build(BuildContext context) {
@@ -84,33 +87,46 @@ class VisitList extends StatelessWidget {
                     title: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(visit.location!),
-                                Text(DateFormat("yyyy-MM-dd")
-                                    .format(DateTime.parse(visit.visitDate!))),
-                                const Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [],
-                                )
+                                Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: Chip(
+                                      padding: EdgeInsets.zero,
+                                      backgroundColor:
+                                          visit.status!.toLowerCase() ==
+                                                  "completed"
+                                              ? Colors.green
+                                              : visit.status!.toLowerCase() ==
+                                                      "cancelled"
+                                                  ? Colors.red
+                                                  : Colors.orange,
+                                      label: Text(
+                                        visit.status!,
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      )),
+                                ),
                               ],
                             ),
-                            Chip(
-                                backgroundColor: visit.status!.toLowerCase() ==
-                                        "completed"
-                                    ? Colors.green
-                                    : visit.status!.toLowerCase() == "cancelled"
-                                        ? Colors.red
-                                        : Colors.orange,
-                                label: Text(
-                                  visit.status!,
-                                  style: const TextStyle(color: Colors.white),
-                                ))
+                            Text(DateFormat("yyyy-MM-dd")
+                                .format(DateTime.parse(visit.visitDate!))),
+                            if (visit.notes!.trim().isNotEmpty)
+                              Text(
+                                visit.notes!,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style:
+                                    TextStyle(color: Colors.grey, fontSize: 12),
+                              ),
+                            if (visit.activitiesDone.isNotEmpty)
+                              activitiesController
+                                  .getActivities(visit.activitiesDone)
                           ],
                         ),
                         const Divider(),
