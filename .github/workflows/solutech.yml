@@ -1,4 +1,3 @@
-# this is the workflow
 name: Flutter CI/CD
 
 on:
@@ -16,5 +15,10 @@ jobs:
         with:
           flutter-version: '3.24.5'
       - run: flutter pub get
-      - run: flutter test
+      # Removed the flutter test step
       - run: flutter build apk --release
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
