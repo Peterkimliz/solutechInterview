@@ -1,6 +1,4 @@
-
 import 'package:hive/hive.dart';
-
 part 'customer.g.dart';
 @HiveType(typeId: 1)
 class CustomerModel {
@@ -10,19 +8,14 @@ class CustomerModel {
   String? name;
   @HiveField(2)
   DateTime? createdAt;
-
   CustomerModel({this.name, this.id, this.createdAt});
-
   factory CustomerModel.fromJson(Map<String, dynamic> json) {
     return CustomerModel(
       id: json['id'],
       name: json['name'],
       createdAt: json['created_at'] == null
           ? null
-          : DateTime.parse(json['created_at']),
-    );
-  }
-
+          : DateTime.parse(json['created_at']),);}
   Map<String, dynamic> toJson() {
     return {
       'id': id,

@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
@@ -6,7 +5,6 @@ import 'package:hive/hive.dart';
 import 'package:solutech/services/customers.dart';
 
 import '../models/customer.dart';
-import '../models/visit.dart';
 import '../utils/functions.dart';
 
 class CustomersController extends GetxController {
