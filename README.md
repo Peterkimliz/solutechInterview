@@ -1,16 +1,9 @@
-# solutech
+#solutech
 
-A new Flutter project.
+The application  apllication uses GetX for state management
+The application uses hive for local storage 
 
-## Getting Started
+To run the application ensure you have flutter version 3.24.5 and above
+Once you have Clone the project run this command on terminal flutter pub get
+Also run this on flutter packages pub run build_runner build to generate hive files 
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
