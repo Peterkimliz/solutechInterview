@@ -11,18 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.5'
-
       - run: flutter pub get
-
       - run: flutter build apk --release
-
-      # Using upload-artifact v2 instead of v3 for compatibility
-      - name: Upload APK artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
