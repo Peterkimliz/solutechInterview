@@ -48,11 +48,9 @@ class CustomersController extends GetxController {
   void onInit() async {
     localBox = await Hive.openBox<CustomerModel>('customers');
     connectivityStream = Connectivity().onConnectivityChanged;
+    fetchCustomers();
     connectivityStream.listen((result) {
-      print("Network Status is ${result}");
-      if (result != ConnectivityResult.none) {
         fetchCustomers();
-      }
     });
 
     super.onInit();

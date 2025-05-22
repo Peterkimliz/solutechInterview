@@ -46,8 +46,9 @@ class VisitsController extends GetxController {
           await localBox.add(viModel);
         }
       } else {
+        print("This is the si units");
         List<VisitModel> unsynced = localBox.values.toList();
-        print("data $unsynced");
+        print("Kimani is the si units");
         visits.assignAll(unsynced);
       }
 
@@ -130,7 +131,9 @@ class VisitsController extends GetxController {
   void onInit() async {
     localBox = await Hive.openBox<VisitModel>('visits');
     connectivityStream = Connectivity().onConnectivityChanged;
+    fetchVisits();
     connectivityStream.listen((result) {
+      fetchVisits();
 
       if (result != ConnectivityResult.none) {
         syncOfflineVisits();

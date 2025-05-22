@@ -30,7 +30,6 @@ class ActivitiesController extends GetxController {
         }
       } else {
         List<ActivityModel> unsynced = localBox.values.toList();
-        print("These are $unsynced");
         activities.assignAll(unsynced);
       }
 
@@ -45,13 +44,9 @@ class ActivitiesController extends GetxController {
   void onInit() async {
     localBox = await Hive.openBox<ActivityModel>('activities');
     connectivityStream = Connectivity().onConnectivityChanged;
+    fetchActivities();
     connectivityStream.listen((result) {
-
-      if (result != ConnectivityResult.none) {
-        fetchActivities();
-      }
-
-
+      fetchActivities();
     });
 
     super.onInit();

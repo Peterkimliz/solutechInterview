@@ -11,7 +11,7 @@ class Dashboard extends StatelessWidget {
   VisitsController visitsController = Get.find<VisitsController>();
   ActivitiesController activitiesController = Get.find<ActivitiesController>();
    Dashboard({super.key}){
-     visitsController.fetchVisits();
+     // visitsController.fetchVisits();
    }
 
   @override

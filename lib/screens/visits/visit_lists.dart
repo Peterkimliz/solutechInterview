@@ -9,7 +9,7 @@ import 'package:solutech/screens/visits/visit_add.dart';
 
 class VisitList extends StatelessWidget {
   VisitList({super.key}) {
-    visitsController.fetchVisits();
+    // visitsController.fetchVisits();
   }
 
   final VisitsController visitsController = Get.find<VisitsController>();
